@@ -1,8 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Hello world
-  </h1>
+  <div>
+    <label for="email"></label>
+    <input id="email" type="email" #email><br>
+
+    <label for="password"></label>
+    <input id="password" type="password" #password><br>
+
+    <button (click)="loginUser(email.value, password.value)">SignIn</button>
+    <button (click)="registerUser(email.value, password.value)">Register</button>
+  </div>
+
   <app-chat></app-chat>
 </div>
 
