@@ -1,6 +1,6 @@
 <div style="height: 300px; background-color: lightblue;">
   <h3 *ngFor="let message of messages | async">
-    {{ message.message }}
+    {{ message.message }} by: {{message.user}}
   </h3>
 </div>
 <input type="text" #newMessage>

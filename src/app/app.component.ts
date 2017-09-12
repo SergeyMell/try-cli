@@ -8,8 +8,18 @@ import {AngularFireAuth} from "angularfire2/auth";
 })
 export class AppComponent {
 
-  constructor(private af: AngularFireAuth) {
+  user: any;
 
+  constructor(private af: AngularFireAuth) {
+    this.user = af.authState;
+  }
+
+  registerUser(email, password) {
+    this.af.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  loginUser(email, password) {
+    this.af.auth.signInWithEmailAndPassword(email, password);
   }
 
 }
