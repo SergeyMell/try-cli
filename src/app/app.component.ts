@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {AngularFireAuth} from "angularfire2/auth";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ export class AppComponent {
 
   user: any;
 
-  constructor(private af: AngularFireAuth) {
+  constructor(private af: AngularFireAuth, private router: Router, private location: Location) {
     this.user = af.authState;
   }
 
@@ -19,7 +21,9 @@ export class AppComponent {
   }
 
   loginUser(email, password) {
-    this.af.auth.signInWithEmailAndPassword(email, password);
+    this.af.auth.signInWithEmailAndPassword(email, password).then(() => {
+      this.router.navigate(this.location['_baseHref']);
+    });
   }
 
 }

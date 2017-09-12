@@ -11,11 +11,15 @@ export class UserSignedInGuard implements CanActivate {
 
   canActivate() {
     return new Promise((resolve, reject) => {
-      this.af.authState.subscribe(
-        () => { resolve(true); },
-        reject
-      );
-    });
-  }
+        this.af.authState.subscribe(
+          (data) => {
+            if (data) {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          });
+  });
+}
 
 }
