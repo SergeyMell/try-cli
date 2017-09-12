@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <div>
+  <div *ngIf="!(user | async)">
     <label for="email">Email</label>
     <input id="email" type="email" #email><br>
 
@@ -11,6 +11,6 @@
     <button (click)="registerUser(email.value, password.value)">Register</button>
   </div>
 
-  <app-chat></app-chat>
+  <router-outlet></router-outlet>
 </div>
 
