@@ -10,6 +10,7 @@ import * as io from 'socket.io-client';
 export class AppComponent {
 
   publicChannel: any;
+  privateChannel: any;
   currentUser: any;
   users = [];
   messages = [];
@@ -37,13 +38,27 @@ export class AppComponent {
     // This could be simple Ajax request
     this.publicChannel.emit('user_join', userObject);
     this.currentUser = userObject;
+
+    this.privateChannel = io(`https://soketer.herokuapp.com/users/${userObject.id}`);
+    this.privateChannel.on('direct_message', (data) => {
+      data.privateMessage = true;
+      this.messages.push(data);
+    });
   }
 
-  sendMessage(message) {
-    this.publicChannel.emit('public_message', {
-      message,
-      user: this.currentUser
-    });
+  sendMessage(message, toUser) {
+    if (toUser) {
+      this.publicChannel.emit('private_message', {
+        message,
+        user: this.currentUser,
+        to: toUser
+      });
+    } else {
+      this.publicChannel.emit('public_message', {
+        message,
+        user: this.currentUser
+      });
+    }
   }
 
 }
