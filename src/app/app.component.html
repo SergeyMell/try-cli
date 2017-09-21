@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Hello world
+    {{ 'app.title' | translate }}
   </h1>
+  <button (click)="changeLocale('ru')">Ru</button>
+  <button (click)="changeLocale('en')">En</button>
 </div>
-
